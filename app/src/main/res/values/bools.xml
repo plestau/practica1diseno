@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="default_suma">true</bool>
+    <bool name="default_resta">true</bool>
+    <bool name="default_multiplicacion">true</bool>
+    <bool name="default_animacion">false</bool>
+</resources>

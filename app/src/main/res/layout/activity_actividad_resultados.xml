@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActividadResultados">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/textOperacionesResueltas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Operaciones resueltas: "
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/textPartidasJugadas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Partidas jugadas: "
+            android:textSize="18sp"
+            android:layout_below="@id/textOperacionesResueltas"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/textOperacionesResueltas"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/textPreguntasAcertadas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preguntas acertadas: "
+            android:textSize="18sp"
+            android:layout_below="@id/textPartidasJugadas"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/textPartidasJugadas"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/textPreguntasFalladas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preguntas falladas: "
+            android:textSize="18sp"
+            android:layout_below="@id/textPreguntasAcertadas"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/textPreguntasAcertadas"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/textPorcentajeAcierto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Porcentaje de acierto: "
+            android:textSize="18sp"
+            android:layout_below="@id/textPreguntasFalladas"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/textPreguntasFalladas"
+            app:layout_constraintStart_toStartOf="parent"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/botonVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Volver"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

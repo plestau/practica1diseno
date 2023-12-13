@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActividadMemoria">
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="4"
+        android:rowCount="3"
+        android:padding="16dp">
+        <ImageView
+            android:id="@+id/card1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:scaleType="fitXY"
+            android:src="@drawable/reverso_carta"
+            android:onClick="onCardClicked" />
+        <ImageView
+            android:id="@+id/card2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="2"
+            android:scaleType="fitXY"
+            android:src="@drawable/reverso_carta"
+            android:onClick="onCardClicked" />
+        <ImageView
+            android:id="@+id/card3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="3"
+            android:scaleType="fitXY"
+            android:src="@drawable/reverso_carta"
+            android:onClick="onCardClicked" />
+        <ImageView
+            android:id="@+id/card4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="4"
+            android:scaleType="fitXY"
+            android:src="@drawable/reverso_carta"
+            android:onClick="onCardClicked" />
+        <ImageView
+            android:id="@+id/card5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="2"
+            android:layout_rowWeight="1"
+            android:scaleType="fitXY"
+            android:src="@drawable/reverso_carta"
+            android:onClick="onCardClicked" />
+        <ImageView
+            android:id="@+id/card6"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="2"
+            android:layout_rowWeight="2"
+            android:scaleType="fitXY"
+            android:src="@drawable/reverso_carta"
+            android:onClick="onCardClicked" />
+        <ImageView
+            android:id="@+id/card7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="2"
+            android:layout_rowWeight="3"
+            android:scaleType="fitXY"
+            android:src="@drawable/reverso_carta"
+            android:onClick="onCardClicked" />
+        <ImageView
+            android:id="@+id/card8"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="2"
+            android:layout_rowWeight="4"
+            android:scaleType="fitXY"
+            android:src="@drawable/reverso_carta"
+            android:onClick="onCardClicked" />
+        <ImageView
+            android:id="@+id/card9"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="3"
+            android:layout_rowWeight="1"
+            android:scaleType="fitXY"
+            android:src="@drawable/reverso_carta"
+            android:onClick="onCardClicked" />
+        <ImageView
+            android:id="@+id/card10"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="3"
+            android:layout_rowWeight="2"
+            android:scaleType="fitXY"
+            android:src="@drawable/reverso_carta"
+            android:onClick="onCardClicked" />
+        <ImageView
+            android:id="@+id/card11"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="3"
+            android:layout_rowWeight="3"
+            android:scaleType="fitXY"
+            android:src="@drawable/reverso_carta"
+            android:onClick="onCardClicked" />
+        <ImageView
+            android:id="@+id/card12"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="3"
+            android:layout_rowWeight="4"
+            android:scaleType="fitXY"
+            android:src="@drawable/reverso_carta"
+            android:onClick="onCardClicked" />
+    </GridLayout>
+    <TextView
+        android:id="@+id/vidasText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Vidas: 5"
+        android:textSize="18sp" />
+    <Button
+        android:id="@+id/restartButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Restart"
+        android:visibility="gone"
+        android:onClick="restartGame" />
+</RelativeLayout>

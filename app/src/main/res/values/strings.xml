@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">1Practica</string>
+    <string name="contador">30</string>
+    <string name="minimo">10</string>
+    <string name="maximo">20</string>
+    <string name="animacion">Sin animación</string>
+    <bool name="suma">true</bool>
+    <bool name="resta">true</bool>
+    <bool name="multiplicacion">true</bool>
+    <string name="default_tiempo">20</string>
+    <string name="default_minimo">1</string>
+    <string name="default_maximo">10</string>
+</resources>
