@@ -15,7 +15,6 @@ class ActividadConfiguracion : AppCompatActivity() {
 
     private lateinit var prefs: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
-
     private lateinit var editarCuentaAtras: EditText
     private lateinit var minimo: EditText
     private lateinit var maximo: EditText
@@ -54,47 +53,51 @@ class ActividadConfiguracion : AppCompatActivity() {
     }
 
     private fun cargarConfiguracion() {
-        // Configuración por defecto
         val tiempoDefecto = "20"
         val minimoDefecto = "10"
         val maximoDefecto = "20"
         val animacionDefecto = 0
+        val sumaDefecto = true
+        val restaDefecto = true
+        val multiplicacionDefecto = false
 
-        // Obtener valores guardados o usar los por defecto
         val tiempo = prefs.getString("tiempo", tiempoDefecto) ?: tiempoDefecto
         val min = prefs.getString("minimo", minimoDefecto) ?: minimoDefecto
         val max = prefs.getString("maximo", maximoDefecto) ?: maximoDefecto
         val anim = prefs.getInt("animacion", animacionDefecto)
+        val suma = prefs.getBoolean("default_suma", sumaDefecto)
+        val resta = prefs.getBoolean("default_resta", restaDefecto)
+        val multiplicacion = prefs.getBoolean("default_multiplicacion", multiplicacionDefecto)
 
         // Actualizar los elementos de la interfaz con los valores cargados
         editarCuentaAtras.setText(tiempo)
         minimo.setText(min)
         maximo.setText(max)
-        suma.isChecked = prefs.getBoolean("suma", true)
-        resta.isChecked = prefs.getBoolean("resta", true)
-        multiplicacion.isChecked = prefs.getBoolean("multiplicacion", true)
+        this.suma.isChecked = suma
+        this.resta.isChecked = resta
+        this.multiplicacion.isChecked = multiplicacion
         animacion.setSelection(anim)
     }
 
     private fun guardarConfiguracion() {
-            editor.putString("tiempo", editarCuentaAtras.text.toString())
-            editor.putString("minimo", minimo.text.toString())
-            editor.putString("maximo", maximo.text.toString())
-            editor.putBoolean("suma", suma.isChecked)
-            editor.putBoolean("resta", resta.isChecked)
-            editor.putBoolean("multiplicacion", multiplicacion.isChecked)
-            editor.putInt("animacion", animacion.selectedItemPosition)
-            editor.apply()
+        editor.putString("tiempo", editarCuentaAtras.text.toString())
+        editor.putString("minimo", minimo.text.toString())
+        editor.putString("maximo", maximo.text.toString())
+        editor.putBoolean("default_suma", suma.isChecked)
+        editor.putBoolean("default_resta", resta.isChecked)
+        editor.putBoolean("default_multiplicacion", multiplicacion.isChecked)
+        editor.putInt("animacion", animacion.selectedItemPosition)
+        editor.apply()
 
-            val intent = Intent(this, ActividadCalculadora::class.java)
-            intent.putExtra("tiempo", editarCuentaAtras.text.toString())
-            intent.putExtra("minimo", minimo.text.toString())
-            intent.putExtra("maximo", maximo.text.toString())
-            intent.putExtra("suma", suma.isChecked)
-            intent.putExtra("resta", resta.isChecked)
-            intent.putExtra("multiplicacion", multiplicacion.isChecked)
-            intent.putExtra("animacion", animacion.selectedItemPosition)
-            setResult(Activity.RESULT_OK, intent)
-            finish()
+        val intent = Intent(this, ActividadCalculadora::class.java)
+        intent.putExtra("tiempo", editarCuentaAtras.text.toString())
+        intent.putExtra("minimo", minimo.text.toString())
+        intent.putExtra("maximo", maximo.text.toString())
+        intent.putExtra("default_suma", suma.isChecked)
+        intent.putExtra("default_resta", resta.isChecked)
+        intent.putExtra("default_multiplicacion", multiplicacion.isChecked)
+        intent.putExtra("animacion", animacion.selectedItemPosition)
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 }

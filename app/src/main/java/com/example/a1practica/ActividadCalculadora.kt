@@ -56,10 +56,13 @@ class ActividadCalculadora : AppCompatActivity(), SharedPreferences.OnSharedPref
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actividad_calculadora)
         sharedPreferences = getSharedPreferences("Configuracion", Context.MODE_PRIVATE)
-        val tiempoPorDefecto = resources.getString(R.string.default_tiempo)
-        val minimoPorDefecto = resources.getString(R.string.default_minimo)
-        val maximoPorDefecto = resources.getString(R.string.default_maximo)
-        val animacionPorDefecto = 0 // Opcionalmente puedes definir un valor por defecto para la animación si lo necesitas
+        val tiempoPorDefecto = resources.getString(R.string.contador)
+        val minimoPorDefecto = resources.getString(R.string.minimo)
+        val maximoPorDefecto = resources.getString(R.string.maximo)
+        val sumaPorDefecto = resources.getBoolean(R.bool.default_suma)
+        val restaPorDefecto = resources.getBoolean(R.bool.default_resta)
+        val multiplicacionPorDefecto = resources.getBoolean(R.bool.default_multiplicacion)
+        val animacionPorDefecto = resources.getInteger(R.integer.default_animacion)
         val partidasJugadas = sharedPreferences.getInt("partidas_jugadas", 0) + 1
 
         // Guardar los valores por defecto en SharedPreferences si no existen
@@ -69,6 +72,9 @@ class ActividadCalculadora : AppCompatActivity(), SharedPreferences.OnSharedPref
         editor.putString("maximo", maximoPorDefecto)
         editor.putInt("partidas_jugadas", partidasJugadas)
         editor.putInt("animacion", animacionPorDefecto)
+        editor.putBoolean("default_suma", sumaPorDefecto)
+        editor.putBoolean("default_resta", restaPorDefecto)
+        editor.putBoolean("default_multiplicacion", multiplicacionPorDefecto)
         // Asegúrate de aplicar el guardado
         editor.apply()
 
@@ -171,7 +177,7 @@ class ActividadCalculadora : AppCompatActivity(), SharedPreferences.OnSharedPref
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         // Detectar cambios en la configuración y actualizar la interfaz aquí
-        if (key == "tiempo" || key == "minimo" || key == "maximo" || key == "suma" || key == "resta" || key == "multiplicacion" || key == "animacion") {
+        if (key == "tiempo" || key == "minimo" || key == "maximo" || key == "default_suma" || key == "default_resta" || key == "default_multiplicacion" || key == "animacion") {
             // Actualizar la configuración en tu actividad
             actualizarConfiguracion()
         }
@@ -179,8 +185,6 @@ class ActividadCalculadora : AppCompatActivity(), SharedPreferences.OnSharedPref
 
     private fun actualizarConfiguracion() {
         duracionCuenta = sharedPreferences.getString("tiempo", "20")!!.toLong() * 1000L
-        // Puedes hacer lo mismo para otros valores de configuración aquí
-
         // Actualizar el temporizador
         val tiempoTranscurrido = SystemClock.elapsedRealtime() - tiempoInicial
         val tiempoRestante = duracionCuenta - tiempoTranscurrido
@@ -258,9 +262,9 @@ class ActividadCalculadora : AppCompatActivity(), SharedPreferences.OnSharedPref
         val minimo = sharedPreferences.getString("minimo", "1")?.toInt() ?: 1
         val maximo = sharedPreferences.getString("maximo", "100")?.toInt() ?: 100
 
-        val sumaPermitida = sharedPreferences.getBoolean("suma", true)
-        val restaPermitida = sharedPreferences.getBoolean("resta", true)
-        val multiplicacionPermitida = sharedPreferences.getBoolean("multiplicacion", true)
+        val sumaPermitida = sharedPreferences.getBoolean("default_suma", true)
+        val restaPermitida = sharedPreferences.getBoolean("default_resta", true)
+        val multiplicacionPermitida = sharedPreferences.getBoolean("default_multiplicacion", true)
 
         val operacionesPermitidas = mutableListOf<Int>()
 
@@ -375,30 +379,13 @@ class ActividadCalculadora : AppCompatActivity(), SharedPreferences.OnSharedPref
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if ((requestCode == 1) && (resultCode == Activity.RESULT_OK)) {
-            val tiempo = data?.getStringExtra("tiempo") ?: "20"
-            val minimo = data?.getStringExtra("minimo") ?: "10"
-            val maximo = data?.getStringExtra("maximo") ?: "20"
-            val suma = data?.getBooleanExtra("suma", true) ?: true
-            val resta = data?.getBooleanExtra("resta", true) ?: true
-            val multiplicacion = data?.getBooleanExtra("multiplicacion", true) ?: true
-            val animacion = data?.getIntExtra("animacion", 0) ?: 0
-
-            // Actualizar la configuración en SharedPreferences
-            val editor = sharedPreferences.edit()
-            editor.putString(R.string.contador.toString(), tiempo)
-            editor.putString(R.string.minimo.toString(), minimo)
-            editor.putString(R.string.maximo.toString(), maximo)
-            editor.putBoolean(R.bool.suma.toString(), suma)
-            editor.putBoolean(R.bool.resta.toString(), resta)
-            editor.putBoolean(R.bool.multiplicacion.toString(), multiplicacion)
-            editor.putInt(R.string.animacion.toString(), animacion)
-
             contadorAcertadas = 0
             contadorFalladas = 0
             numeroAcertadas.text = contadorAcertadas.toString()
             numeroFalladas.text = contadorFalladas.toString()
+            operacionAnterior = ""
+            resultadoOperacionAnterior.setImageResource(0)
 
             // Actualizar la configuración en la actividad
             actualizarConfiguracion()
