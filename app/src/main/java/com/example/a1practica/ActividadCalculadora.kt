@@ -109,7 +109,18 @@ class ActividadCalculadora : AppCompatActivity(), SharedPreferences.OnSharedPref
         configuracion.setOnClickListener {
             val intent = Intent(this, ActividadConfiguracion::class.java)
             ActivityCompat.startActivityForResult(this, intent, 1, null)
+            // pausa el contador y guarda el tiempo restante solo si se realizan cambios en la configuración
+            val tiempoTranscurrido = SystemClock.elapsedRealtime() - tiempoInicial
+            val tiempoRestante = duracionCuenta - tiempoTranscurrido
+            val tiempoGuardado = sharedPreferences.getLong("tiempo_restante", 0)
+            if (tiempoRestante != tiempoGuardado) {
+                cuentaAtras?.cancel()
+                val editor = sharedPreferences.edit()
+                editor.putLong("tiempo_restante", tiempoRestante)
+                editor.apply()
+            }
         }
+
         boton0.setOnClickListener {
             anadirNumero(0)
         }
@@ -173,6 +184,26 @@ class ActividadCalculadora : AppCompatActivity(), SharedPreferences.OnSharedPref
     override fun onDestroy() {
         super.onDestroy()
         sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this)
+        val tiempoRestante = sharedPreferences.getLong("tiempo_restante", 0)
+        if (tiempoRestante > 0) {
+            // Actualiza el temporizador con el tiempo restante
+            duracionCuenta = tiempoRestante
+            actualizarConfiguracion()
+            // cambia las acertadas y falladas a 0 y actualiza la interfaz
+            contadorAcertadas = 0
+            contadorFalladas = 0
+            numeroAcertadas.text = contadorAcertadas.toString()
+            numeroFalladas.text = contadorFalladas.toString()
+            // elimina la operación anterior y el simbolo de acierto o fallo
+            operacionPasada.text = ""
+            resultadoOperacionAnterior.setImageResource(0)
+            generarOperacion(false)
+        }
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {

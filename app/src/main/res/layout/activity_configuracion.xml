@@ -76,6 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center"
         android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/textoOperaciones">
 
@@ -83,7 +84,7 @@
             android:id="@+id/suma"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Suma"
+            android:text="+"
             android:textColor="@color/gris"
             android:textSize="20sp"
             android:layout_marginHorizontal="10dp"/>
@@ -92,7 +93,7 @@
             android:id="@+id/resta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Resta"
+            android:text="-"
             android:textColor="@color/gris"
             android:textSize="20sp"
             android:layout_marginHorizontal="10dp"/>
@@ -101,7 +102,7 @@
             android:id="@+id/multiplicacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Multiplicación"
+            android:text="*"
             android:textColor="@color/gris"
             android:textSize="15sp"
             android:layout_marginHorizontal="10dp"/>
